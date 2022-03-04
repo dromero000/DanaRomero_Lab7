@@ -73,6 +73,16 @@ public class Main extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jf_simulacion = new javax.swing.JFrame();
+        jLabel10 = new javax.swing.JLabel();
+        cb_j1 = new javax.swing.JComboBox<>();
+        cb_j2 = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jl_goles2 = new javax.swing.JLabel();
+        jl_goles1 = new javax.swing.JLabel();
+        btn_ok = new javax.swing.JButton();
+        btn_simular1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_Equipo = new javax.swing.JMenu();
         jmitem_crear = new javax.swing.JMenuItem();
@@ -296,6 +306,89 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
+        jf_simulacion.setSize(new java.awt.Dimension(400, 300));
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel10.setText("Simulación");
+
+        jLabel11.setText("Jugador 1");
+
+        jLabel12.setText("Jugador 2");
+
+        btn_ok.setText("OK");
+
+        btn_simular1.setText("Simular");
+        btn_simular1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simular1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jf_simulacionLayout = new javax.swing.GroupLayout(jf_simulacion.getContentPane());
+        jf_simulacion.getContentPane().setLayout(jf_simulacionLayout);
+        jf_simulacionLayout.setHorizontalGroup(
+            jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_simulacionLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addGap(92, 92, 92))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jf_simulacionLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(jl_goles1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jl_goles2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
+            .addGroup(jf_simulacionLayout.createSequentialGroup()
+                .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jf_simulacionLayout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabel10))
+                    .addGroup(jf_simulacionLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(cb_j1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(cb_j2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jf_simulacionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ok)
+                .addGap(69, 69, 69))
+            .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jf_simulacionLayout.createSequentialGroup()
+                    .addGap(56, 56, 56)
+                    .addComponent(btn_simular1)
+                    .addContainerGap(275, Short.MAX_VALUE)))
+        );
+        jf_simulacionLayout.setVerticalGroup(
+            jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_simulacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jl_goles1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jf_simulacionLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(36, 36, 36)
+                        .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cb_j1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_j2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jl_goles2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(btn_ok)
+                .addGap(33, 33, 33))
+            .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jf_simulacionLayout.createSequentialGroup()
+                    .addContainerGap(245, Short.MAX_VALUE)
+                    .addComponent(btn_simular1)
+                    .addGap(30, 30, 30)))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jm_Equipo.setText("Equipo");
@@ -342,6 +435,11 @@ public class Main extends javax.swing.JFrame {
         jMenu2.setText("Partidos");
 
         jMenuItem1.setText("Simulación");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setText("Tabla de Posiciones");
@@ -503,6 +601,18 @@ public class Main extends javax.swing.JFrame {
         jf_cargar.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jf_simulacion.setLocationRelativeTo(this);
+        jf_simulacion.setVisible(true);
+        jf_simulacion.setAlwaysOnTop(true);
+        llenarComboBoxS();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btn_simular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simular1ActionPerformed
+        Equipo jugador1 = getEquipo(String.valueOf(cb_j1.getSelectedItem()));
+        Equipo jugador2 = getEquipo(String.valueOf(cb_j2.getSelectedItem()));
+    }//GEN-LAST:event_btn_simular1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -547,6 +657,22 @@ public class Main extends javax.swing.JFrame {
                 Scanner leerNombre = new Scanner (lineaEntera).useDelimiter(";");
                 String nombre= leerNombre.next();
                 jc_equipos.addItem(nombre);
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void llenarComboBoxS (){
+        try {
+            Scanner leerLineaEntera = new Scanner(equipoFile);
+           
+            while (leerLineaEntera.hasNext()){
+                String lineaEntera = leerLineaEntera.nextLine();
+                Scanner leerNombre = new Scanner (lineaEntera).useDelimiter(";");
+                String nombre= leerNombre.next();
+                cb_j1.addItem(nombre);
+                cb_j2.addItem(nombre);
             }
 
         } catch (FileNotFoundException ex) {
@@ -637,9 +763,16 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregarEquipo;
     private javax.swing.JButton btn_modificarEquipo;
+    private javax.swing.JButton btn_ok;
+    private javax.swing.JButton btn_simular1;
+    private javax.swing.JComboBox<String> cb_j1;
+    private javax.swing.JComboBox<String> cb_j2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -659,7 +792,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JFrame jf_crearEquipo;
     private javax.swing.JFrame jf_eliminarEquipo;
     private javax.swing.JFrame jf_modificarEquipo;
+    private javax.swing.JFrame jf_simulacion;
     private javax.swing.JList<String> jl_equipos;
+    private javax.swing.JLabel jl_goles1;
+    private javax.swing.JLabel jl_goles2;
     private javax.swing.JMenu jm_Equipo;
     private javax.swing.JMenuItem jmitem_cargar;
     private javax.swing.JMenuItem jmitem_crear;
