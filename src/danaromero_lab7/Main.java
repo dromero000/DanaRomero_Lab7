@@ -22,6 +22,8 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         fileInit();
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
