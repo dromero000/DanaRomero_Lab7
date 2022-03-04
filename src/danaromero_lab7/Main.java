@@ -46,6 +46,12 @@ public class Main extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn_agregarEquipo = new javax.swing.JButton();
         jf_modificarEquipo = new javax.swing.JFrame();
+        jLabel5 = new javax.swing.JLabel();
+        jc_equiposM = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jt_nuevoNombre = new javax.swing.JTextField();
+        btn_modificarEquipo = new javax.swing.JButton();
         jf_eliminarEquipo = new javax.swing.JFrame();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -112,21 +118,74 @@ public class Main extends javax.swing.JFrame {
                 .addGap(73, 73, 73))
         );
 
+        jf_modificarEquipo.setPreferredSize(new java.awt.Dimension(400, 350));
+        jf_modificarEquipo.setSize(new java.awt.Dimension(400, 300));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel5.setText("Modificar Equipo");
+
+        jc_equiposM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_equiposMActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setText("Seleccione el equipo a modificar");
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setText("Ingrese nuevo nombre");
+
+        btn_modificarEquipo.setText("Modificar");
+        btn_modificarEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modificarEquipoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jf_modificarEquipoLayout = new javax.swing.GroupLayout(jf_modificarEquipo.getContentPane());
         jf_modificarEquipo.getContentPane().setLayout(jf_modificarEquipoLayout);
         jf_modificarEquipoLayout.setHorizontalGroup(
             jf_modificarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jf_modificarEquipoLayout.createSequentialGroup()
+                .addGroup(jf_modificarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jf_modificarEquipoLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addGroup(jf_modificarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jt_nuevoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(jc_equiposM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jf_modificarEquipoLayout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(btn_modificarEquipo))
+                    .addGroup(jf_modificarEquipoLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel5)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jf_modificarEquipoLayout.setVerticalGroup(
             jf_modificarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jf_modificarEquipoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jc_equiposM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jt_nuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_modificarEquipo)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jf_eliminarEquipo.setSize(new java.awt.Dimension(400, 300));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setText("Eliminar Frame");
+        jLabel3.setText("Eliminar Equipo");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Seleccione el equipo a eliminar");
@@ -197,6 +256,11 @@ public class Main extends javax.swing.JFrame {
         jm_Equipo.add(jmitem_eliminar);
 
         jmitem_modificar.setText("Modificar");
+        jmitem_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmitem_modificarActionPerformed(evt);
+            }
+        });
         jm_Equipo.add(jmitem_modificar);
 
         jmitem_cargar.setText("Cargar");
@@ -235,10 +299,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jm_EquipoActionPerformed
 
     private void jmitem_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_eliminarActionPerformed
-        for (Equipo e: listaEquipos){
-            System.out.println(e.nombre);
-        }
-        llenarComboBox();
+
+        llenarComboBoxE();
         jf_eliminarEquipo.setLocationRelativeTo(this);
         jf_eliminarEquipo.setVisible(true);
         jf_eliminarEquipo.setAlwaysOnTop(true);
@@ -248,8 +310,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jmitem_eliminarActionPerformed
 
     private void jmitem_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_crearActionPerformed
-        
-        
+
         jf_crearEquipo.setLocationRelativeTo(this);
         jf_crearEquipo.setVisible(true);
         jf_crearEquipo.setAlwaysOnTop(true);
@@ -280,7 +341,37 @@ public class Main extends javax.swing.JFrame {
          jf_eliminarEquipo.dispose();
          jc_equipos.removeAllItems();
          JOptionPane.showMessageDialog(null, "Equipo Eliminado Exitosamente");
+         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jc_equiposMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_equiposMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jc_equiposMActionPerformed
+
+    private void btn_modificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarEquipoActionPerformed
+        Equipo equipoModificar = getEquipo(String.valueOf(jc_equiposM.getSelectedItem()));
+        String nuevoNombre = jt_nuevoNombre.getText();
+        if(getEquipo(nuevoNombre)==null){
+            Equipo equipoModificado = new Equipo(nuevoNombre);
+            listaEquipos.set(listaEquipos.indexOf(equipoModificar), equipoModificado);
+            jc_equiposM.removeAllItems();
+            jf_modificarEquipo.dispose();
+            JOptionPane.showMessageDialog(null, "Equipo Modificado Exitosamente");
+        }else{
+            jt_nuevoNombre.setText("");
+            jf_modificarEquipo.setAlwaysOnTop(false);
+            JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
+            jf_modificarEquipo.setAlwaysOnTop(true);
+        }
+    }//GEN-LAST:event_btn_modificarEquipoActionPerformed
+
+    private void jmitem_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_modificarActionPerformed
+        llenarComboBoxM();
+        jt_nuevoNombre.setText("");
+        jf_modificarEquipo.setLocationRelativeTo(this);
+        jf_modificarEquipo.setVisible(true);
+        jf_modificarEquipo.setAlwaysOnTop(true);
+    }//GEN-LAST:event_jmitem_modificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,9 +408,15 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
-    public void llenarComboBox (){
+    public void llenarComboBoxE (){
         for (Equipo e: listaEquipos){
             jc_equipos.addItem(e.nombre);
+        }
+    }
+    
+    public void llenarComboBoxM (){
+        for (Equipo e: listaEquipos){
+            jc_equiposM.addItem(e.nombre);
         }
     }
     public Equipo getEquipo(String name){
@@ -335,16 +432,21 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregarEquipo;
+    private javax.swing.JButton btn_modificarEquipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JComboBox<String> jc_equipos;
+    private javax.swing.JComboBox<String> jc_equiposM;
     private javax.swing.JFrame jf_crearEquipo;
     private javax.swing.JFrame jf_eliminarEquipo;
     private javax.swing.JFrame jf_modificarEquipo;
@@ -354,6 +456,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmitem_eliminar;
     private javax.swing.JMenuItem jmitem_modificar;
     private javax.swing.JTextField jt_nombreEquipo;
+    private javax.swing.JTextField jt_nuevoNombre;
     // End of variables declaration//GEN-END:variables
 
     //Función para crear el arcivo

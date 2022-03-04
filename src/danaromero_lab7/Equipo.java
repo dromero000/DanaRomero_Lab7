@@ -104,6 +104,11 @@ public class Equipo {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
+
+    @Override
+    public String toString() {
+        return nombre + ";" + partidos + ";" + ganados + ";" + empatados + ";" + perdidos + ";" + golesFavor + ";" + golesContra + ";" + diferencia + ";" + puntos;
+    }
     
     
     
