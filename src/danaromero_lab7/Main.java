@@ -346,11 +346,32 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregarEquipoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         Equipo equipoEliminar = getEquipo(String.valueOf(jc_equipos.getSelectedItem()));
+        Equipo equipoEliminar = getEquipo(String.valueOf(jc_equipos.getSelectedItem()));
+        try {
+                Scanner leer = new Scanner(equipoFile);
+                String textoEntero = "";
+                while(leer.hasNext()){
+                    String linea=leer.nextLine();
+                    Scanner scan = new Scanner(linea).useDelimiter(";");
+                    String name1= scan.next();
+                    if (!name1.equals(equipoEliminar.nombre)){
+                       textoEntero +=linea+"\n"; 
+                    }
+               
+            }
+                 FileWriter bw = new FileWriter (equipoFile,false);
+                 bw.write(textoEntero);
+                 bw.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jf_eliminarEquipo.dispose();
+             jc_equipos.removeAllItems();
+             JOptionPane.showMessageDialog(null, "Equipo Eliminado Exitosamente");
+        
+        /*
          listaEquipos.remove(equipoEliminar);
-         jf_eliminarEquipo.dispose();
-         jc_equipos.removeAllItems();
-         JOptionPane.showMessageDialog(null, "Equipo Eliminado Exitosamente");
+         */
          
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -372,7 +393,6 @@ public class Main extends javax.swing.JFrame {
                     String linea=leer.nextLine();
                     Scanner scan = new Scanner(linea).useDelimiter(";");
                     String name1= scan.next();
-                    System.out.println(name1);
                     if (name1.equals(equipoModificar.nombre)){
                         textoEntero +=equipoModificado.toString()+"\n";
                     }else{
