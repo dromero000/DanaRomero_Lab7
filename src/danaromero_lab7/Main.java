@@ -6,12 +6,14 @@
 package danaromero_lab7;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -359,52 +361,47 @@ public class Main extends javax.swing.JFrame {
     private void btn_modificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarEquipoActionPerformed
         Equipo equipoModificar = getEquipo(String.valueOf(jc_equiposM.getSelectedItem()));
         String nuevoNombre = jt_nuevoNombre.getText();
-        
-        try {
-            fw = new FileWriter (equipoFile,false);
+        Equipo equipoModificado = new Equipo(nuevoNombre);
+          
             if(!existsInFile(nuevoNombre)){
                 BufferedReader buff;
             try {
-                buff = new BufferedReader(new FileReader(equipoFile));
-                String letras;
+                Scanner leer = new Scanner(equipoFile);
                 String textoEntero = "";
-                while((letras=buff.readLine())!=null){
-                    textoEntero +=letras;
-                    if (letras.contains(equipoModificar.nombre)){
-                        
+                while(leer.hasNext()){
+                    String linea=leer.nextLine();
+                    Scanner scan = new Scanner(linea).useDelimiter(";");
+                    String name1= scan.next();
+                    System.out.println(name1);
+                    if (name1.equals(equipoModificar.nombre)){
+                        textoEntero +=equipoModificado.toString()+"\n";
+                    }else{
+                       textoEntero +=linea+"\n"; 
                     }
-
+               
             }
+                FileWriter bw = new FileWriter (equipoFile,false);
+                 bw.write(textoEntero);
+                 bw.flush();
             } catch (IOException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
-                Equipo equipo = new Equipo(nuevoNombre);
-                jt_nombreEquipo.setText("");
-                jf_crearEquipo.dispose();
-                fw.write(equipo.toString()+"\n");
-                fw.flush();
-                JOptionPane.showMessageDialog(null, "Equipo Creado Exitosamente");
+               jc_equiposM.removeAllItems();
+                jf_modificarEquipo.dispose();
+                JOptionPane.showMessageDialog(null, "Equipo Modificado Exitosamente");
             }else{
-                jt_nombreEquipo.setText("");
-                jf_crearEquipo.setAlwaysOnTop(false);
+                jt_nuevoNombre.setText("");
+                jf_modificarEquipo.setAlwaysOnTop(false);
                 JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
-                jf_crearEquipo.setAlwaysOnTop(true);
-            }
-        } catch (IOException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                jf_modificarEquipo.setAlwaysOnTop(true);
+                }
+
+            
         /*
         if(getEquipo(nuevoNombre)==null){
-            Equipo equipoModificado = new Equipo(nuevoNombre);
+            
             listaEquipos.set(listaEquipos.indexOf(equipoModificar), equipoModificado);
-            jc_equiposM.removeAllItems();
-            jf_modificarEquipo.dispose();
-            JOptionPane.showMessageDialog(null, "Equipo Modificado Exitosamente");
-        }else{
-            jt_nuevoNombre.setText("");
-            jf_modificarEquipo.setAlwaysOnTop(false);
-            JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
-            jf_modificarEquipo.setAlwaysOnTop(true);
+            
         }*/
     }//GEN-LAST:event_btn_modificarEquipoActionPerformed
 
