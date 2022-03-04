@@ -28,6 +28,9 @@ public class Main extends javax.swing.JFrame {
     
     ArrayList <Equipo> listaEquipos = new ArrayList();
     File equipoFile=new File("equipo.txt");
+    FileWriter fw = null;
+
+
     public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -318,9 +321,10 @@ public class Main extends javax.swing.JFrame {
     private void btn_agregarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarEquipoActionPerformed
         String nombreEquipo = jt_nombreEquipo.getText();
         try {
-            FileWriter fw = new FileWriter (equipoFile, true);
+            fw = new FileWriter (equipoFile, true);
             if(!existsInFile(nombreEquipo)){
                 Equipo equipo = new Equipo(nombreEquipo);
+                listaEquipos.add(new Equipo (nombreEquipo));
                 jt_nombreEquipo.setText("");
                 jf_crearEquipo.dispose();
                 fw.write(equipo.toString()+"\n");
@@ -332,18 +336,6 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
                 jf_crearEquipo.setAlwaysOnTop(true);
             }
-            /*
-            if (getEquipo(nombreEquipo)==null){
-            listaEquipos.add(new Equipo (nombreEquipo));
-            jt_nombreEquipo.setText("");
-            jf_crearEquipo.dispose();
-            JOptionPane.showMessageDialog(null, "Equipo Creado Exitosamente");
-            }else{
-            jt_nombreEquipo.setText("");
-            jf_crearEquipo.setAlwaysOnTop(false);
-            JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
-            jf_crearEquipo.setAlwaysOnTop(true);
-            }*/
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -367,6 +359,41 @@ public class Main extends javax.swing.JFrame {
     private void btn_modificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarEquipoActionPerformed
         Equipo equipoModificar = getEquipo(String.valueOf(jc_equiposM.getSelectedItem()));
         String nuevoNombre = jt_nuevoNombre.getText();
+        
+        try {
+            fw = new FileWriter (equipoFile,false);
+            if(!existsInFile(nuevoNombre)){
+                BufferedReader buff;
+            try {
+                buff = new BufferedReader(new FileReader(equipoFile));
+                String letras;
+                String textoEntero = "";
+                while((letras=buff.readLine())!=null){
+                    textoEntero +=letras;
+                    if (letras.contains(equipoModificar.nombre)){
+                        
+                    }
+
+            }
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                Equipo equipo = new Equipo(nuevoNombre);
+                jt_nombreEquipo.setText("");
+                jf_crearEquipo.dispose();
+                fw.write(equipo.toString()+"\n");
+                fw.flush();
+                JOptionPane.showMessageDialog(null, "Equipo Creado Exitosamente");
+            }else{
+                jt_nombreEquipo.setText("");
+                jf_crearEquipo.setAlwaysOnTop(false);
+                JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
+                jf_crearEquipo.setAlwaysOnTop(true);
+            }
+        } catch (IOException ex) {
+        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*
         if(getEquipo(nuevoNombre)==null){
             Equipo equipoModificado = new Equipo(nuevoNombre);
             listaEquipos.set(listaEquipos.indexOf(equipoModificar), equipoModificado);
@@ -378,7 +405,7 @@ public class Main extends javax.swing.JFrame {
             jf_modificarEquipo.setAlwaysOnTop(false);
             JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
             jf_modificarEquipo.setAlwaysOnTop(true);
-        }
+        }*/
     }//GEN-LAST:event_btn_modificarEquipoActionPerformed
 
     private void jmitem_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_modificarActionPerformed
