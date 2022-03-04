@@ -5,7 +5,11 @@
  */
 package danaromero_lab7;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,7 +27,7 @@ public class Main extends javax.swing.JFrame {
      */
     
     ArrayList <Equipo> listaEquipos = new ArrayList();
-    
+    File equipoFile=new File("equipo.txt");
     public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -299,39 +303,51 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jm_EquipoActionPerformed
 
     private void jmitem_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_eliminarActionPerformed
-
         llenarComboBoxE();
         jf_eliminarEquipo.setLocationRelativeTo(this);
         jf_eliminarEquipo.setVisible(true);
         jf_eliminarEquipo.setAlwaysOnTop(true);
-        
-        
-        
     }//GEN-LAST:event_jmitem_eliminarActionPerformed
 
     private void jmitem_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_crearActionPerformed
-
         jf_crearEquipo.setLocationRelativeTo(this);
         jf_crearEquipo.setVisible(true);
         jf_crearEquipo.setAlwaysOnTop(true);
-        
-
-        
     }//GEN-LAST:event_jmitem_crearActionPerformed
 
     private void btn_agregarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarEquipoActionPerformed
         String nombreEquipo = jt_nombreEquipo.getText();
-        if (getEquipo(nombreEquipo)==null){
+        try {
+            FileWriter fw = new FileWriter (equipoFile, true);
+            if(!existsInFile(nombreEquipo)){
+                Equipo equipo = new Equipo(nombreEquipo);
+                jt_nombreEquipo.setText("");
+                jf_crearEquipo.dispose();
+                fw.write(equipo.toString()+"\n");
+                fw.flush();
+                JOptionPane.showMessageDialog(null, "Equipo Creado Exitosamente");
+            }else{
+                jt_nombreEquipo.setText("");
+                jf_crearEquipo.setAlwaysOnTop(false);
+                JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
+                jf_crearEquipo.setAlwaysOnTop(true);
+            }
+            /*
+            if (getEquipo(nombreEquipo)==null){
             listaEquipos.add(new Equipo (nombreEquipo));
             jt_nombreEquipo.setText("");
             jf_crearEquipo.dispose();
             JOptionPane.showMessageDialog(null, "Equipo Creado Exitosamente");
-        }else{
+            }else{
             jt_nombreEquipo.setText("");
             jf_crearEquipo.setAlwaysOnTop(false);
             JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
             jf_crearEquipo.setAlwaysOnTop(true);
+            }*/
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
                 
     }//GEN-LAST:event_btn_agregarEquipoActionPerformed
 
@@ -428,6 +444,24 @@ public class Main extends javax.swing.JFrame {
         return null;
     }
     
+    public boolean existsInFile (String name){
+        BufferedReader buff;
+        try {
+            buff = new BufferedReader(new FileReader(equipoFile));
+            String letras;
+            while((letras=buff.readLine())!=null){
+                if (letras.contains(name)){
+                    return true;
+                }
+
+        }
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -462,7 +496,6 @@ public class Main extends javax.swing.JFrame {
     //Función para crear el arcivo
     
     public void fileInit (){
-        File equipoFile = new File("equipo.txt");
         
         try {
             equipoFile.createNewFile();
