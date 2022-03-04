@@ -45,7 +45,12 @@ public class Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btn_agregarEquipo = new javax.swing.JButton();
-        jFrame1 = new javax.swing.JFrame();
+        jf_modificarEquipo = new javax.swing.JFrame();
+        jf_eliminarEquipo = new javax.swing.JFrame();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jc_equipos = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_Equipo = new javax.swing.JMenu();
         jmitem_crear = new javax.swing.JMenuItem();
@@ -107,15 +112,63 @@ public class Main extends javax.swing.JFrame {
                 .addGap(73, 73, 73))
         );
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jf_modificarEquipoLayout = new javax.swing.GroupLayout(jf_modificarEquipo.getContentPane());
+        jf_modificarEquipo.getContentPane().setLayout(jf_modificarEquipoLayout);
+        jf_modificarEquipoLayout.setHorizontalGroup(
+            jf_modificarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jf_modificarEquipoLayout.setVerticalGroup(
+            jf_modificarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jf_eliminarEquipo.setSize(new java.awt.Dimension(400, 300));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel3.setText("Eliminar Frame");
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setText("Seleccione el equipo a eliminar");
+
+        jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jf_eliminarEquipoLayout = new javax.swing.GroupLayout(jf_eliminarEquipo.getContentPane());
+        jf_eliminarEquipo.getContentPane().setLayout(jf_eliminarEquipoLayout);
+        jf_eliminarEquipoLayout.setHorizontalGroup(
+            jf_eliminarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_eliminarEquipoLayout.createSequentialGroup()
+                .addGroup(jf_eliminarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jf_eliminarEquipoLayout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(jLabel3))
+                    .addGroup(jf_eliminarEquipoLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addGroup(jf_eliminarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jc_equipos, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jf_eliminarEquipoLayout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jButton1)))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+        jf_eliminarEquipoLayout.setVerticalGroup(
+            jf_eliminarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_eliminarEquipoLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel3)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jc_equipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jButton1)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -182,21 +235,32 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jm_EquipoActionPerformed
 
     private void jmitem_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_eliminarActionPerformed
-        // TODO add your handling code here:
+        for (Equipo e: listaEquipos){
+            System.out.println(e.nombre);
+        }
+        llenarComboBox();
+        jf_eliminarEquipo.setLocationRelativeTo(this);
+        jf_eliminarEquipo.setVisible(true);
+        jf_eliminarEquipo.setAlwaysOnTop(true);
+        
+        
+        
     }//GEN-LAST:event_jmitem_eliminarActionPerformed
 
     private void jmitem_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_crearActionPerformed
+        
+        
         jf_crearEquipo.setLocationRelativeTo(this);
         jf_crearEquipo.setVisible(true);
         jf_crearEquipo.setAlwaysOnTop(true);
         
-        
+
         
     }//GEN-LAST:event_jmitem_crearActionPerformed
 
     private void btn_agregarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarEquipoActionPerformed
         String nombreEquipo = jt_nombreEquipo.getText();
-        if (!exists(nombreEquipo)){
+        if (getEquipo(nombreEquipo)==null){
             listaEquipos.add(new Equipo (nombreEquipo));
             jt_nombreEquipo.setText("");
             jf_crearEquipo.dispose();
@@ -209,6 +273,14 @@ public class Main extends javax.swing.JFrame {
         }
                 
     }//GEN-LAST:event_btn_agregarEquipoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         Equipo equipoEliminar = getEquipo(String.valueOf(jc_equipos.getSelectedItem()));
+         listaEquipos.remove(equipoEliminar);
+         jf_eliminarEquipo.dispose();
+         jc_equipos.removeAllItems();
+         JOptionPane.showMessageDialog(null, "Equipo Eliminado Exitosamente");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,27 +316,38 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    public boolean exists(String name){
+
+    public void llenarComboBox (){
+        for (Equipo e: listaEquipos){
+            jc_equipos.addItem(e.nombre);
+        }
+    }
+    public Equipo getEquipo(String name){
         for (Equipo e: listaEquipos){
             if (e.nombre.equalsIgnoreCase(name)){
-                return true;
+                return e;
             }
         }
-        return false;
+        return null;
     }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregarEquipo;
-    private javax.swing.JFrame jFrame1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JComboBox<String> jc_equipos;
     private javax.swing.JFrame jf_crearEquipo;
+    private javax.swing.JFrame jf_eliminarEquipo;
+    private javax.swing.JFrame jf_modificarEquipo;
     private javax.swing.JMenu jm_Equipo;
     private javax.swing.JMenuItem jmitem_cargar;
     private javax.swing.JMenuItem jmitem_crear;
