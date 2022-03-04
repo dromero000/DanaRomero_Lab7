@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -66,6 +67,12 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jc_equipos = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jf_cargar = new javax.swing.JFrame();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jl_equipos = new javax.swing.JList<>();
+        jLabel8 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_Equipo = new javax.swing.JMenu();
         jmitem_crear = new javax.swing.JMenuItem();
@@ -188,7 +195,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jt_nuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_modificarEquipo)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jf_eliminarEquipo.setSize(new java.awt.Dimension(400, 300));
@@ -239,6 +246,56 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
+        jf_cargar.setSize(new java.awt.Dimension(400, 600));
+
+        jScrollPane1.setViewportView(jl_equipos);
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel8.setText("Cargando Archivos");
+
+        jButton2.setText("OK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Cargando archivo de equipo.txt");
+
+        javax.swing.GroupLayout jf_cargarLayout = new javax.swing.GroupLayout(jf_cargar.getContentPane());
+        jf_cargar.getContentPane().setLayout(jf_cargarLayout);
+        jf_cargarLayout.setHorizontalGroup(
+            jf_cargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_cargarLayout.createSequentialGroup()
+                .addGroup(jf_cargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jf_cargarLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel8))
+                    .addGroup(jf_cargarLayout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel9))
+                    .addGroup(jf_cargarLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jf_cargarLayout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jButton2)))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        jf_cargarLayout.setVerticalGroup(
+            jf_cargarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jf_cargarLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jButton2)
+                .addContainerGap(70, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jm_Equipo.setText("Equipo");
@@ -273,6 +330,11 @@ public class Main extends javax.swing.JFrame {
         jm_Equipo.add(jmitem_modificar);
 
         jmitem_cargar.setText("Cargar");
+        jmitem_cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmitem_cargarActionPerformed(evt);
+            }
+        });
         jm_Equipo.add(jmitem_cargar);
 
         jMenuBar1.add(jm_Equipo);
@@ -326,7 +388,6 @@ public class Main extends javax.swing.JFrame {
             fw = new FileWriter (equipoFile, true);
             if(!existsInFile(nombreEquipo)){
                 Equipo equipo = new Equipo(nombreEquipo);
-                listaEquipos.add(new Equipo (nombreEquipo));
                 jt_nombreEquipo.setText("");
                 jf_crearEquipo.dispose();
                 fw.write(equipo.toString()+"\n");
@@ -414,9 +475,7 @@ public class Main extends javax.swing.JFrame {
                 jf_modificarEquipo.setAlwaysOnTop(false);
                 JOptionPane.showMessageDialog(null, "¡ERROR!\nEl nombre del equipo ingresado ya existe");
                 jf_modificarEquipo.setAlwaysOnTop(true);
-                }
-
-            
+                } 
         /*
         if(getEquipo(nuevoNombre)==null){
             
@@ -432,6 +491,17 @@ public class Main extends javax.swing.JFrame {
         jf_modificarEquipo.setVisible(true);
         jf_modificarEquipo.setAlwaysOnTop(true);
     }//GEN-LAST:event_jmitem_modificarActionPerformed
+
+    private void jmitem_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitem_cargarActionPerformed
+       jf_cargar.setLocationRelativeTo(this);
+        jf_cargar.setVisible(true);
+        jf_cargar.setAlwaysOnTop(true);
+        cargarArchivo();
+    }//GEN-LAST:event_jmitem_cargarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jf_cargar.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -469,22 +539,53 @@ public class Main extends javax.swing.JFrame {
     }
 
     public void llenarComboBoxE (){
-        for (Equipo e: listaEquipos){
-            jc_equipos.addItem(e.nombre);
+        try {
+            Scanner leerLineaEntera = new Scanner(equipoFile);
+           
+            while (leerLineaEntera.hasNext()){
+                String lineaEntera = leerLineaEntera.nextLine();
+                Scanner leerNombre = new Scanner (lineaEntera).useDelimiter(";");
+                String nombre= leerNombre.next();
+                jc_equipos.addItem(nombre);
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void llenarComboBoxM (){
-        for (Equipo e: listaEquipos){
-            jc_equiposM.addItem(e.nombre);
+        try {
+            Scanner leerLineaEntera = new Scanner(equipoFile);
+           
+            while (leerLineaEntera.hasNext()){
+                String lineaEntera = leerLineaEntera.nextLine();
+                Scanner leerNombre = new Scanner (lineaEntera).useDelimiter(";");
+                String nombre= leerNombre.next();
+                jc_equiposM.addItem(nombre);
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public Equipo getEquipo(String name){
-        for (Equipo e: listaEquipos){
-            if (e.nombre.equalsIgnoreCase(name)){
-                return e;
+        try {
+            Scanner leerLineaEntera = new Scanner(equipoFile);
+           
+            while (leerLineaEntera.hasNext()){
+                String lineaEntera = leerLineaEntera.nextLine();
+                Scanner leerNombre = new Scanner (lineaEntera).useDelimiter(";");
+                String nombre= leerNombre.next();
+                if (name.equals(nombre)){
+                    return new Equipo(nombre);
+                }
             }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return null;
     }
     
@@ -506,12 +607,38 @@ public class Main extends javax.swing.JFrame {
         
     }
     
+    public void cargarArchivo(){
+        listaEquipos.clear();
+        
+        try {
+            Scanner leerLineaEntera = new Scanner(equipoFile);
+           
+            while (leerLineaEntera.hasNext()){
+                String lineaEntera = leerLineaEntera.nextLine();
+                Scanner leerNombre = new Scanner (lineaEntera).useDelimiter(";");
+                String nombre= leerNombre.next();
+                listaEquipos.add(new Equipo (nombre));
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for(int i=0; i<listaEquipos.size(); i++) {
+            listModel.add(i, listaEquipos.get(i));
+        }
+        //Asociar el modelo de lista al JList
+        jl_equipos.setModel(listModel);
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregarEquipo;
     private javax.swing.JButton btn_modificarEquipo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -519,15 +646,20 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jc_equipos;
     private javax.swing.JComboBox<String> jc_equiposM;
+    private javax.swing.JFrame jf_cargar;
     private javax.swing.JFrame jf_crearEquipo;
     private javax.swing.JFrame jf_eliminarEquipo;
     private javax.swing.JFrame jf_modificarEquipo;
+    private javax.swing.JList<String> jl_equipos;
     private javax.swing.JMenu jm_Equipo;
     private javax.swing.JMenuItem jmitem_cargar;
     private javax.swing.JMenuItem jmitem_crear;
