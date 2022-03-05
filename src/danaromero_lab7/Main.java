@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -316,6 +317,11 @@ public class Main extends javax.swing.JFrame {
         jLabel12.setText("Jugador 2");
 
         btn_ok.setText("OK");
+        btn_ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_okActionPerformed(evt);
+            }
+        });
 
         btn_simular1.setText("Simular");
         btn_simular1.addActionListener(new java.awt.event.ActionListener() {
@@ -611,7 +617,15 @@ public class Main extends javax.swing.JFrame {
     private void btn_simular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simular1ActionPerformed
         Equipo jugador1 = getEquipo(String.valueOf(cb_j1.getSelectedItem()));
         Equipo jugador2 = getEquipo(String.valueOf(cb_j2.getSelectedItem()));
+        Random r = new Random();
+        jl_goles1.setText(String.valueOf(r.nextInt(12)));
+        jl_goles2.setText(String.valueOf(r.nextInt(12)));
+        
     }//GEN-LAST:event_btn_simular1ActionPerformed
+
+    private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okActionPerformed
+        jf_cargar.dispose();
+    }//GEN-LAST:event_btn_okActionPerformed
 
     /**
      * @param args the command line arguments
